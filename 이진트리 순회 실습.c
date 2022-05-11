@@ -10,24 +10,24 @@ typedef struct TrNode{
 }TNode;
 
 typedef TNode* Element;
-Element data[MAX_QUEUE_SIZE]; // ¿ä¼ÒÀÇ ¹è¿­
-int front; // Àü´Ü
-int rear; // ÈÄ´Ü
+Element data[MAX_QUEUE_SIZE]; // ìš”ì†Œì˜ ë°°ì—´
+int front; // ì „ë‹¨
+int rear; // í›„ë‹¨
 
-int count_node(TNode *n){
+int count_node(TNode *n){  // ë…¸ë“œì˜ ìˆ˜ ì¸¡ì •
 	if(n == NULL) return 0;
 	else
 		return 1 + count_node(n->left) + count_node(n->right);
 } 
 
-int count_leaf(TNode *n){
+int count_leaf(TNode *n){ // ë‹¨ë§ë…¸ë“œì˜ ìˆ˜ ì¸¡ì •
 	if(n == NULL ) return 0;
 	if(n->left == NULL && n->right == NULL) return 1;
 	else
 	return count_leaf(n->left) + count_leaf(n->right);
 }
 
-int calc_height(TNode *n){
+int calc_height(TNode *n){ // íŠ¸ë¦¬ì˜ ë†’ì´ ì¸¡ì •
 	int hLeft, hRight;
 	if(n == NULL) return 0;
 	hLeft = calc_height(n->left);
@@ -49,7 +49,7 @@ int size() { return(rear - front + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE; }
 void enqueue(Element val)
 {
 if (is_full())
-	error("  Å¥ Æ÷È­ ¿¡·¯");
+	error("  í í¬í™” ì—ëŸ¬");
 	rear = (rear + 1) % MAX_QUEUE_SIZE;
 	data[rear] = val;
 }
@@ -57,7 +57,7 @@ if (is_full())
 Element dequeue()
 {
 	if (is_empty())
-	error("  Å¥ °ø¹é ¿¡·¯");
+	error("  í ê³µë°± ì—ëŸ¬");
 	front = (front + 1) % MAX_QUEUE_SIZE;
 	return data[front];
 }
@@ -65,11 +65,11 @@ Element dequeue()
 Element peek()
 {
 	if (is_empty())
-	error("  Å¥ °ø¹é ¿¡·¯");
+	error("  í ê³µë°± ì—ëŸ¬");
 	return data[(front + 1) % MAX_QUEUE_SIZE];
 }
 
-void Level_order(TNode* n){
+void Level_order(TNode* n){ // ë ˆë²¨ìˆœíšŒ 
 	Element queue;
 	init_queue();
 	if(n == NULL) return;
@@ -84,14 +84,14 @@ void Level_order(TNode* n){
 	}
 }
 
-struct TrNode* newNode(char data){
+struct TrNode* newNode(char data){ //ìƒˆë¡œìš´ íŠ¸ë¦¬ë…¸ë“œ ì¶”ê°€
 	struct TrNode* node = (struct TrNode*)malloc(sizeof(struct TrNode));
 	node->data = data;
 	node->left = NULL;
 	node->right = NULL;
 }
 
-void preorder(TNode *n){
+void preorder(TNode *n){ //ì „ìœ„ìˆœíšŒ
 	if(n!=NULL){
 		printf("[%c] ", n->data);
 		preorder(n->left);
@@ -99,7 +99,7 @@ void preorder(TNode *n){
 	}
 }
 
-void inorder(TNode *n){
+void inorder(TNode *n){ //ì¤‘ìœ„ìˆœíšŒ
 	if(n!=NULL){
 		inorder(n->left);
 		printf("[%c] ", n->data);
@@ -107,7 +107,7 @@ void inorder(TNode *n){
 	}
 }
 
-void postorder(TNode *n){
+void postorder(TNode *n){ // í›„ìœ„ìˆœíšŒ
 	if(n!=NULL){
 		postorder(n->left);
 		postorder(n->right);
@@ -142,9 +142,9 @@ int main(void) {
 	printf("\n");
 	
 	printf("\n");
-	printf("³ëµåÀÇ ¼ö      : %d \n", count_node(root));
-	printf("´Ü¸» ³ëµåÀÇ ¼ö : %d \n", count_leaf(root));
-	printf("Æ®¸®ÀÇ ³ôÀÌ    : %d \n", calc_height(root)); 
+	printf("ë…¸ë“œì˜ ìˆ˜      : %d \n", count_node(root));
+	printf("ë‹¨ë§ ë…¸ë“œì˜ ìˆ˜ : %d \n", count_leaf(root));
+	printf("íŠ¸ë¦¬ì˜ ë†’ì´    : %d \n", calc_height(root)); 
 
 	
 
