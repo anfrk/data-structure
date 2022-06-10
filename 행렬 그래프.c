@@ -3,35 +3,35 @@
 #define MAX_VERTEX 30
 
 typedef struct graph{
-	int vsize;		//±×·¡ÇÁÀÇ Á¤Á¡ °³¼ö 
-	int adj[MAX_VERTEX][MAX_VERTEX];		//±×·¡ÇÁ¿¡ ´ëÇÑ 30x30 ÀÎÁ¢Çà·Ä 
-	char vdata[MAX_VERTEX];		//Á¤Á¡¿¡ ÀúÀåÇÒ µ¥ÀÌÅÍ ¹è¿­ 
+	int vsize;		//ê·¸ë˜í”„ì˜ ì •ì  ê°œìˆ˜ 
+	int adj[MAX_VERTEX][MAX_VERTEX];		//ê·¸ë˜í”„ì— ëŒ€í•œ 30x30 ì¸ì ‘í–‰ë ¬ 
+	char vdata[MAX_VERTEX];		//ì •ì ì— ì €ì¥í•  ë°ì´í„° ë°°ì—´ 
 }Graph;
 
-void init_graph(Graph *g){		//±×·¡ÇÁ ÃÊ±âÈ­ 
+void init_graph(Graph *g){		//ê·¸ë˜í”„ ì´ˆê¸°í™” 
 	int i, j;
-	g->vsize = 0;		//Á¤Á¡ °³¼ö ÃÊ±âÈ­ 
-	for(i=0; i<MAX_VERTEX; i++){		//ÀÎÁ¢Çà·Ä ÃÊ±âÈ­ 
+	g->vsize = 0;		//ì •ì  ê°œìˆ˜ ì´ˆê¸°í™” 
+	for(i=0; i<MAX_VERTEX; i++){		//ì¸ì ‘í–‰ë ¬ ì´ˆê¸°í™” 
 		for(j=0; j<MAX_VERTEX; j++){
 			g->adj[i][j] = 0;
 		}
 	}
 }
 
-void insert_Vertex(Graph *g, char name){		//Á¤Á¡¿¡ nameÀ» »ğÀÔ 
-	if((g->vsize)+1 > MAX_VERTEX){		//ÇöÀç ±×·¡ÇÁÀÇ Á¤Á¡°³¼ö¿¡ 1°³¸¦ ´õÇßÀ»¶§ ÃÖ´ñ°ªÀ» ³Ñ´ÂÁö °Ë»ç 
-		printf("Error : Á¤Á¡ °³¼ö¸¦ ÃÊ°ú Çß½À´Ï´Ù.");
+void insert_Vertex(Graph *g, char name){		//ì •ì ì— nameì„ ì‚½ì… 
+	if((g->vsize)+1 > MAX_VERTEX){		//í˜„ì¬ ê·¸ë˜í”„ì˜ ì •ì ê°œìˆ˜ì— 1ê°œë¥¼ ë”í–ˆì„ë•Œ ìµœëŒ“ê°’ì„ ë„˜ëŠ”ì§€ ê²€ì‚¬ 
+		printf("Error : ì •ì  ê°œìˆ˜ë¥¼ ì´ˆê³¼ í–ˆìŠµë‹ˆë‹¤.");
 	}
-	else{		//Á¤Á¡ °³¼ö°¡ ¾È³ÑÀ»¶§ 
-		g->vdata[g->vsize++] = name;		//Á¤Á¡¿¡ name°ªÀ» ÀúÁ¤ÇÏ°í Á¤Á¡°³¼ö¸¦ Áõ°¡ 
+	else{		//ì •ì  ê°œìˆ˜ê°€ ì•ˆë„˜ì„ë•Œ 
+		g->vdata[g->vsize++] = name;		//ì •ì ì— nameê°’ì„ ì €ì •í•˜ê³  ì •ì ê°œìˆ˜ë¥¼ ì¦ê°€ 
 	}
 }
 
-void insert_Edge1(Graph *g, int u, int v){		//±×·¡ÇÁ¿¡ ¹«¹æÇâ ±×·¡ÇÁ °£¼± (u, v)¸¦ »ğÀÔ 
+void insert_Edge1(Graph *g, int u, int v){		//ê·¸ë˜í”„ì— ë¬´ë°©í–¥ ê·¸ë˜í”„ ê°„ì„  (u, v)ë¥¼ ì‚½ì… 
 	g->adj[u][v] = g->adj[v][u]	= 1;
 } 
 
-void insert_Edge2(Graph *g, int u, int v){		//±×·¡ÇÁ¿¡ ¹æÇâ ±×·¡ÇÁ °£¼± <u, v>¸¦ »ğÀÔ 
+void insert_Edge2(Graph *g, int u, int v){		//ê·¸ë˜í”„ì— ë°©í–¥ ê·¸ë˜í”„ ê°„ì„  <u, v>ë¥¼ ì‚½ì… 
 	g->adj[u][v] = 1; 
 }
 
@@ -49,13 +49,13 @@ int main(void) {
 	int i;
 	Graph *G1, *G2, *G3;
 	
-	G1 = (Graph *)malloc(sizeof(Graph *));		//±×·¡ÇÁ G1°ú G2, G3 µ¿ÀûÇÒ´ç 
-	G2 = (Graph *)malloc(sizeof(Graph *));
-	G3 = (Graph *)malloc(sizeof(Graph *));
+	G1 = (Graph *)malloc(sizeof(Graph));		//ê·¸ë˜í”„ G1ê³¼ G2, G3 ë™ì í• ë‹¹ 
+	G2 = (Graph *)malloc(sizeof(Graph));
+	G3 = (Graph *)malloc(sizeof(Graph));
 	
 	init_graph(G1);
 	
-	for(i=0; i<4; i++){		//±×·¡ÇÁ G1ÀÇ Á¤Á¡¿¡ °¢ »ğÀÔ 
+	for(i=0; i<4; i++){		//ê·¸ë˜í”„ G1ì˜ ì •ì ì— ê° ì‚½ì… 
 		insert_Vertex(G1, 'A'+i);
 	}
 	insert_Edge1(G1, 0, 1);
@@ -63,12 +63,12 @@ int main(void) {
 	insert_Edge1(G1, 1, 2);
 	insert_Edge1(G1, 1, 3);
 	insert_Edge1(G1, 2, 3);
-	printf("\n G1ÀÇ ÀÎÁ¢Çà·Ä");
+	printf("\n G1ì˜ ì¸ì ‘í–‰ë ¬");
 	print_graph(G1);
 	
 	init_graph(G2);
 	
-	for(i=0; i<4; i++){		//±×·¡ÇÁ G2ÀÇ Á¤Á¡¿¡ °¢ »ğÀÔ 
+	for(i=0; i<4; i++){		//ê·¸ë˜í”„ G2ì˜ ì •ì ì— ê° ì‚½ì… 
 		insert_Vertex(G2, 'A'+i);
 	}
 	insert_Edge1(G2, 0, 1);
@@ -76,12 +76,12 @@ int main(void) {
 	insert_Edge1(G2, 1, 2);
 	insert_Edge1(G2, 1, 3);
 	insert_Edge1(G2, 2, 3);
-	printf("\n G2ÀÇ ÀÎÁ¢Çà·Ä");
+	printf("\n G2ì˜ ì¸ì ‘í–‰ë ¬");
 	print_graph(G2);
 	
 	init_graph(G3);
 	
-	for(i=0; i<4; i++){		//±×·¡ÇÁ G3ÀÇ Á¤Á¡¿¡ °¢ »ğÀÔ 
+	for(i=0; i<4; i++){		//ê·¸ë˜í”„ G3ì˜ ì •ì ì— ê° ì‚½ì… 
 		insert_Vertex(G3, 'A'+i);
 	}
 	insert_Edge2(G3, 0, 1);
@@ -89,7 +89,7 @@ int main(void) {
 	insert_Edge2(G3, 1, 2);
 	insert_Edge2(G3, 1, 3);
 	insert_Edge2(G3, 2, 3);
-	printf("\n G3ÀÇ ÀÎÁ¢Çà·Ä");
+	printf("\n G3ì˜ ì¸ì ‘í–‰ë ¬");
 	print_graph(G3);
 	
 	return 0;
